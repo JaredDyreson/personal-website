@@ -11,11 +11,3 @@ def home():
 @app.route("/about")
 def about():
     return render_template('about.html', title="About")
-
-@app.route("/downloads", methods=['GET'])
-def downloads():
-	#assets_path = "assets/"
-	#filename = "resume.pdf"
-	#send_from_directory(assets_path, filename, as_attachment=True, mimetype='application/pdf', attachment_filename="{}.pdf".format(filename))
-
-	return render_template('home.html', title="Home")
