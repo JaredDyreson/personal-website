@@ -43,3 +43,4 @@ class PortfolioItem(db.Model):
 	
 	def __repr__(self):
 		return "PortfolioItem({}, {}, {}, {})".format(self.title, self.demo_link, self.source_link, self.documentation_link, self.image_file)
+
