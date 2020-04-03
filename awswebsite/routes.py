@@ -6,14 +6,15 @@ from awswebsite.models import PortfolioItem
 @app.route("/")
 @app.route("/home")
 def home():
-  cpsc_223C_exam = PortfolioItem(
-      "CPSC-223C Exam One Coding",
-      "Coding assignment for CPSC-223C Exam 1 (Click Source Code)",
-       0,
-      "/static/assets/C_progamming.png",
-      "https://google.com",
-      "https://google.com",
-      "https://github.com/JaredDyreson/C-Programming/blob/master/exam_one/code_for_exam.c"
+  diff_project = PortfolioItem(
+    "delta",
+    "A clone of the UNIX utility 'diff'",
+    0,
+    "/static/assets/diff.jpg",
+    "https://google.com",
+    "https://github.com/JaredDyreson/delta",
+    "https://google.com"
+
   )
   starbucks_automa = PortfolioItem(
       "Starbucks Automa",
@@ -45,7 +46,7 @@ def home():
 
   )
 
-  return render_template('portfolio.html', PortfolioItems=[cpsc_223C_exam, starbucks_automa, funnel_cake, website])
+  return render_template('portfolio.html', PortfolioItems=[diff_project, starbucks_automa, funnel_cake, website])
 
 
 @app.route("/about")
