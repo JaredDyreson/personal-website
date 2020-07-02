@@ -19,7 +19,7 @@ def home():
   starbucks_automa = PortfolioItem(
       "Starbucks Automa",
       "Auto work scheduler for the Starbucks Partner Portal",
-       _,
+       1,
       "/static/assets/starbucks_coffee_robot_wallpaper-t2.jpg",
       "https://asciinema.org/a/9m8kAz6O45TyPMPAU34Hivtiv?t=1",
       "https://jareddyreson.github.io/posts/starbucks_automa_documentation.html",
@@ -28,7 +28,7 @@ def home():
   funnel_cake = PortfolioItem(
       "Funnel Cake",
       "Utility for managing Spotify playlists",
-       _,
+       2,
       "/static/assets/funnel_cake.jpg",
       "http://funnelcake-env.s29abpc9ge.us-west-1.elasticbeanstalk.com/",
       "https://github.com/JaredDyreson/Spoterm/blob/master/flask_stuff/DOCUMENTATION.md",
@@ -38,7 +38,7 @@ def home():
   website = PortfolioItem(
       "Personal Website",
       "A place to host portfolio items and show a little about me",
-      _,
+      3,
       "/static/assets/python-bottle-aws-1.width-808.jpg",
       "http://jareddyreson.com",
       "https://google.com",
@@ -46,9 +46,10 @@ def home():
 
   )
   
-  items = [diff_project, starbucks_automa, funnel_cake, website]
-  for x, item in enumerate(items):
-      item.number = x
+  items = [diff_project, 
+            starbucks_automa, 
+            funnel_cake, 
+            website]
 
   return render_template('portfolio.html', PortfolioItems=items)
 
