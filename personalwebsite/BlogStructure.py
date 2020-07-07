@@ -6,18 +6,19 @@ from termcolor import colored
 
 class BlogHierarchy():
     def __init__(self, path: pathlib.Path):
-        if not(isinstance(path, pathlib.Path) and
-               path.is_dir()):
+        if not(isinstance(path, pathlib.Path)):
             raise ValueError
+
         self.base = path.absolute()
+        self.relative = path
         self.structure = self.generate_structure()
         self.topics = self.get_topics()
 
     def generate_structure(self):
         structure = {'': {}}
-        for dirpath, dirnames, filenames in os.walk(path):
+        for dirpath, dirnames, filenames in os.walk(self.base.name):
             state = structure
-            dirpath = dirpath[len(path.name):]
+            dirpath = dirpath[len(self.base.name):]
             for subdir in dirpath.split(os.sep):
                 based = state
                 state = state[subdir]
@@ -73,28 +74,3 @@ class BlogHierarchy():
                 match_format = colored(line[start:end], 'red')
                 index_format = colored(f'{relative_path}:{x}', 'green')
                 print(f'{index_format} {match_format}{line[end:]}')
-
-
-structure = {
-    "blog": {
-        "scripting": {
-            "bash": ["hello.md"],
-            "python": ["input.md"]
-        },
-        "notes": {
-            "math": ["slope.md"],
-            "biology": ["cells.md"]
-        }
-    }
-}
-
-pp = pprint.PrettyPrinter(indent=4)
-
-path = pathlib.Path("./blog")
-
-H = BlogHierarchy(path)
-
-example = H.search(("scripting", "python", "input.md"))
-H.grep_blog_contents(example, "^\#\s+(?P<title>.*)")
-out = H.get_subtopic_structure()
-print(example.stat())

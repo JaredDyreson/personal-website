@@ -8,23 +8,21 @@
 </style>
 
 <html>
-<head>
+<hea>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
 
-{% for BlogItem in BlogItems %}
+{% for BlogCategory in BlogCategories %}
 
 <article class="media content-section">
   <div class="media-body">
-    <a class="project-link">Category: {{ BlogItem.category }}</a>
-    <h2><a class="article-title">{{ BlogItem.title_ }}</a></h2>
-    <p class="article-content">{{ BlogItem.contents|safe }}</p>
+    <h2><a class="project-link" href="/blog/{{ BlogCategory.category }}">{{ BlogCategory.category }}</a></h2>
+    <img src="{{ BlogCategory.image_path }}", width=480, height=300></img>
     <div class="article-metadata">
-    <p class="bottom-one"></p>
+    {{ BlogCategory.description }}
     </div>
-    <a class="project-link">{{ BlogItem.creation_date }}</a>
   </div>
 </article>
 

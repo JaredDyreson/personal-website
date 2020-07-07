@@ -1,7 +1,31 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
+from personalwebsite.MarkdownParser import Markdown
+import pathlib
 
+
+class BlogItem():
+    def __init__(self, source: Markdown):
+        if not(isinstance(source, Markdown)):
+            raise ValueError
+
+        self.category = source.category
+        self.contents = source.formatted_contents
+        self.creation_date = source.creation_date
+        self.source = source
+        self.title = source.title_
+
+class BlogCategory():
+    def __init__(self, category: str, 
+                    image_src: str, description: str):
+        if not(isinstance(category, str) and
+               isinstance(image_src, str) and
+               isinstance(description, str)):
+               raise ValueError
+        self.category = category
+        self.description = description
+        self.image_path = image_src
 
 class PortfolioItem():
     def __init__(self, title, content, number,
@@ -15,13 +39,13 @@ class PortfolioItem():
                 isinstance(src_link, str)):
             raise ValueError
 
-        self.title_ = title
         self.content = content
-        self.number = number
-        self.image_path = image_path
         self.demo_link = demo_link
         self.doc_link = doc_link
+        self.image_path = image_path
+        self.number = number
         self.src_link = src_link
+        self.title_ = title
 
 
 class GasolineCalculatorForm(FlaskForm):
