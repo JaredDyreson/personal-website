@@ -18,7 +18,7 @@
 
 <article class="media content-section">
   <div class="media-body">
-    <a class="project-link">Category: {{ BlogItem.category }}</a>
+    <a class="project-link" href="/blog/{{ BlogItem.subcategory }}/{{ BlogItem.category }}">Category: {{ BlogItem.category }}</a>
     <h2><a class="article-title">{{ BlogItem.title_ }}</a></h2>
     <p class="article-content">{{ BlogItem.contents|safe }}</p>
     <div class="article-metadata">

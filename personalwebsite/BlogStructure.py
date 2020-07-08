@@ -3,6 +3,7 @@ import os
 import pprint
 import re
 from termcolor import colored
+import json
 
 class BlogHierarchy():
     def __init__(self, path: pathlib.Path):
@@ -14,9 +15,14 @@ class BlogHierarchy():
         self.structure = self.generate_structure()
         self.topics = self.get_topics()
 
+    def __repr__(self):
+        return f'json.dumps({self.structure}, indent=4)'
+
     def generate_structure(self):
         structure = {'': {}}
         for dirpath, dirnames, filenames in os.walk(self.base.name):
+            if("assets" in dirnames):
+                dirnames.remove("assets")
             state = structure
             dirpath = dirpath[len(self.base.name):]
             for subdir in dirpath.split(os.sep):
@@ -74,3 +80,5 @@ class BlogHierarchy():
                 match_format = colored(line[start:end], 'red')
                 index_format = colored(f'{relative_path}:{x}', 'green')
                 print(f'{index_format} {match_format}{line[end:]}')
+
+DEFAULT_BUILD = BlogHierarchy(pathlib.Path("blog"))

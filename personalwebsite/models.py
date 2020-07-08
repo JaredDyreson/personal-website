@@ -11,10 +11,19 @@ class BlogItem():
             raise ValueError
 
         self.category = source.category
+        self.subcategory = source.subcategory
         self.contents = source.formatted_contents
         self.creation_date = source.creation_date
         self.source = source
         self.title = source.title_
+
+    def __repr__(self):
+        return f"""
+        Category: {self.category}
+        Subcategory: {self.subcategory}
+        Last modified: {self.creation_date}
+        Title: {self.title}
+        """
 
 class BlogCategory():
     def __init__(self, category: str, 

@@ -4,7 +4,7 @@ import os
 import pathlib
 import re
 import time
-
+# from personalwebsite import app
 
 """
 This class will take in Markdown and correctly render it into HTML.
@@ -26,13 +26,32 @@ class Markdown():
             raise ValueError
         self.path = path
         self.read_contents()
+        self.replaced = self.find_replace_links()
         self.format_contents()
         self.title_ = self.get_title()
         self.category = self.get_category()
+        self.subcategory  = self.get_subcategory()
         self.creation_date = self.get_last_modified()
 
     def get_category(self):
         return os.path.basename(self.path.parent)
+
+    def get_subcategory(self):
+        return os.path.basename(os.path.dirname(os.path.dirname(self.path)))
+
+    def find_replace_links(self):
+        new_contents = []
+        link_regex = re.compile("\!\[(?P<name>.*)\]\((?P<link>.*)\)")
+        for line in self.contents:
+            match = link_regex.match(line)
+            if(match):
+                flask_relative_link = f'/static/assets/{self.get_subcategory()}/{self.get_category()}/{os.path.basename(match.group("link"))}'
+                # flask_relative_link = "/static/assets/arch_logo.png"
+                substitute = r"![\g<name>]({})".format(flask_relative_link)
+                line  = link_regex.sub(substitute, line)
+            new_contents.append(line)
+
+        self.contents = new_contents
 
     def format_contents(self):
         markdown_extensions = [

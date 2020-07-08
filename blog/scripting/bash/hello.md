@@ -1,0 +1,7 @@
+# Bash Hello World Example
+
+```bash
+echo "Hello World"
+```
+
+This is an example of a hello world program in Shell scripting

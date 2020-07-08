@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for, flash, redirect, request, session, send_file, send_from_directory
 from personalwebsite import app
 from personalwebsite.models import PortfolioItem, GasolineCalculatorForm, BlogItem, BlogCategory
-from personalwebsite.BlogStructure import BlogHierarchy
+from personalwebsite.BlogStructure import BlogHierarchy, DEFAULT_BUILD
 from personalwebsite.MarkdownParser import Markdown
 import pathlib
 import os
@@ -33,13 +33,13 @@ def build_structure():
         if(isinstance(content, list)):
             for instance in content:
                 instance_path = pathlib.Path(os.path.join(path.name, category, instance))
-                blog_posts.append(Markdown(instance_path))
+                blog_posts.append(Markdown(instance_path.absolute()))
         else:
             for subcategory in content:
                 subcontent = structure[category][subcategory]
                 for instance in subcontent:
                     instance_path = pathlib.Path(os.path.join(path.name, category, subcategory, instance))
-                    blog_posts.append(Markdown(instance_path))
+                    blog_posts.append(Markdown(instance_path.absolute()))
 
     blog_posts = [BlogItem(post) for post in blog_posts]
     return (blog_posts, all_categories)
@@ -103,27 +103,31 @@ def about():
 
 @app.route("/blog")
 def blog():
+    linux = BlogCategory(
+        "linux",
+        "/static/assets/blog_categories/linux.png",
+        "All things Linux related"
+    )
+
     scripting = BlogCategory(
         "scripting",
-        "/static/assets/blog_categories/scripting.jpg",
+        "/static/assets/blog_categories/scripting.png",
         "Learn how to automate tedious proceses with different scripting languages"
     )
+
     items = [
+        linux,
         scripting
     ]
     return render_template('blog_categories.html', BlogCategories=items, title = "Blog")
 
 @app.route("/blog/<category>")
 def blogcategories(category):
-    print(f'got: {category}')
-    return render_template('blog_landing_page.html')
+    return render_template('blog.html', BlogItems=[post for post in BLOG_POSTS if post.subcategory == category])
 
 @app.route("/blog/<category>/<subcategory>")
 def blogpage(category, subcategory):
-    path = pathlib.Path(os.path.join(app.root_path, "blog"))
-    Blog = BlogHierarchy(path)
-    structure = Blog.structure['']
-    return render_template('blog_landing_page.html')
+    return render_template('blog.html', BlogItems=[post for post in BLOG_POSTS if post.category == subcategory])
 
 @app.route("/calculator", methods = ['GET', 'POST'])
 def calculator():
