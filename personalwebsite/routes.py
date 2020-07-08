@@ -53,7 +53,7 @@ def home():
         "delta",
         "A clone of the UNIX utility 'diff'",
         0,
-        "/static/assets/diff.jpg",
+        "/static/assets/portfolio_items/diff.jpg",
         "https://google.com",
         "https://github.com/JaredDyreson/delta",
         "https://google.com"
@@ -63,7 +63,7 @@ def home():
         "Starbucks Automa",
         "Auto work scheduler for the Starbucks Partner Portal",
         1,
-        "/static/assets/starbucks_coffee_robot_wallpaper-t2.jpg",
+        "/static/assets/portfolio_items/starbucks_coffee_robot_wallpaper-t2.jpg",
         "https://asciinema.org/a/9m8kAz6O45TyPMPAU34Hivtiv?t=1",
         "https://jareddyreson.github.io/posts/starbucks_automa_documentation.html",
         "https://github.com/JaredDyreson/starbucks_automa_production"
@@ -72,7 +72,7 @@ def home():
         "Funnel Cake",
         "Utility for managing Spotify playlists",
         2,
-        "/static/assets/funnel_cake.jpg",
+        "/static/assets/portfolio_items/funnel_cake.jpg",
         "http://funnelcake-env.s29abpc9ge.us-west-1.elasticbeanstalk.com/",
         "https://github.com/JaredDyreson/Spoterm/blob/master/flask_stuff/DOCUMENTATION.md",
         "https://github.com/jareddyreson/funnel-cake"
@@ -82,7 +82,7 @@ def home():
         "Personal Website",
         "A place to host portfolio items and show a little about me",
         3,
-        "/static/assets/python-bottle-aws-1.width-808.jpg",
+        "/static/assets/portfolio_items/python-bottle-aws-1.width-808.jpg",
         "http://jareddyreson.com",
         "https://google.com",
         "https://github.com/JaredDyreson/aws-website"
