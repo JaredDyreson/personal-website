@@ -20,11 +20,13 @@
   <div class="media-body">
     <a class="project-link" href="/blog/{{ BlogItem.subcategory }}/{{ BlogItem.category }}">Category: {{ BlogItem.category }}</a>
     <h2><a class="article-title">{{ BlogItem.title_ }}</a></h2>
-    <p class="article-content">{{ BlogItem.contents|safe }}</p>
+    <p class="article-content">{{ BlogItem.truncate_contents|safe }}</p>
     <div class="article-metadata">
     <p class="bottom-one"></p>
     </div>
     <a class="project-link">{{ BlogItem.creation_date }}</a>
+    <div></div>
+    <a class="project-link" href="/blog/{{ BlogItem.subcategory }}/{{ BlogItem.category }}/{{ BlogItem.base_file_name }}">[Read More...]</a>
   </div>
 </article>
 

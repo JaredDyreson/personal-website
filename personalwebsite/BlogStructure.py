@@ -60,8 +60,9 @@ class BlogHierarchy():
 
         path_to_file = pathlib.Path(os.path.join(self.base, root, subject, filename))
 
-        if not(path_to_file.exists()):
-                 raise FileNotFoundError
+        # if not(path_to_file.exists()):
+            # print(path_to_file.absolute())
+            # raise FileNotFoundError
 
         return path_to_file
 

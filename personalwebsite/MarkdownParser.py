@@ -46,7 +46,6 @@ class Markdown():
             match = link_regex.match(line)
             if(match):
                 flask_relative_link = f'/static/assets/{self.get_subcategory()}/{self.get_category()}/{os.path.basename(match.group("link"))}'
-                # flask_relative_link = "/static/assets/arch_logo.png"
                 substitute = r"![\g<name>]({})".format(flask_relative_link)
                 line  = link_regex.sub(substitute, line)
             new_contents.append(line)
@@ -68,9 +67,17 @@ class Markdown():
             extensions = markdown_extensions
         )
 
+        truncated_template = markdown.markdown(
+            "\n".join(self.contents[:10]),
+            output_format = 'html5',
+            tab_length = 4,
+            extensions = markdown_extensions
+        )
+
         formatter = HtmlFormatter(style="friendly", full=True, cssclass="codehilite")
         markdown_css = f'<style>{formatter.get_style_defs()}</style>'
         self.formatted_contents = f'{markdown_template}{markdown_css}'
+        self.truncated_contents = f'{truncated_template}{markdown_css}'
 
     def read_contents(self):
         self.contents = [line for line in self.path.open()]
@@ -92,4 +99,6 @@ class Markdown():
     def write_formatted(self):
         with open(f'{self.path.stem}.html', "w") as fp:
             fp.write(self.formatted_contents)
+
+h = Markdown(pathlib.Path("./README.md"))
 

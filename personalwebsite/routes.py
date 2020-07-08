@@ -11,6 +11,9 @@ MPG = 26
 TANK = 15.5
 MILES_MAX_AVAIL = MPG * TANK
 
+path = pathlib.Path(os.path.join(app.root_path, "blog"))
+Blog = BlogHierarchy(path)
+
 def compute(current: int) -> float:
     """
     Compute the epsilon from max miles available (based on the tank size) and the current reading on the odometer
@@ -23,8 +26,6 @@ def compute(current: int) -> float:
 
 def build_structure():
     blog_posts, all_categories = [], []
-    path = pathlib.Path(os.path.join(app.root_path, "blog"))
-    Blog = BlogHierarchy(path)
     structure = Blog.structure['']
 
     for category in structure:
@@ -45,6 +46,16 @@ def build_structure():
     return (blog_posts, all_categories)
 
 BLOG_POSTS, BLOG_CATEGORIES = build_structure()
+
+def search_posts(params: tuple):
+    cat, subcat, name = params
+    print(name)
+    for post in BLOG_POSTS:
+        c, s, n = post.subcategory, post.category, post.file_name
+        if(c == cat and s == subcat and n.split()[0] == n):
+            return post
+    return None
+
 
 @app.route("/")
 @app.route("/home")
@@ -128,6 +139,13 @@ def blogcategories(category):
 @app.route("/blog/<category>/<subcategory>")
 def blogpage(category, subcategory):
     return render_template('blog.html', BlogItems=[post for post in BLOG_POSTS if post.category == subcategory])
+
+@app.route("/blog/<category>/<subcategory>/<article>")
+def blogarticle(category, subcategory, article):
+    found = search_posts((category, subcategory, article))
+    if(found):
+        return render_template('blog_landing_page.html', BI=found)
+    return redirect(url_for('calculator'))
 
 @app.route("/calculator", methods = ['GET', 'POST'])
 def calculator():

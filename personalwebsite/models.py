@@ -13,9 +13,12 @@ class BlogItem():
         self.category = source.category
         self.subcategory = source.subcategory
         self.contents = source.formatted_contents
+        self.truncate_contents = source.truncated_contents
         self.creation_date = source.creation_date
         self.source = source
         self.title = source.title_
+        self.file_name = source.path.name
+        self.base_file_name = self.file_name.split('.')[0]
 
     def __repr__(self):
         return f"""
