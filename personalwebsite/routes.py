@@ -49,7 +49,6 @@ BLOG_POSTS, BLOG_CATEGORIES = build_structure()
 
 def search_posts(params: tuple):
     cat, subcat, name = params
-    print(name)
     for post in BLOG_POSTS:
         c, s, n = post.subcategory, post.category, post.file_name
         if(c == cat and s == subcat and n.split()[0] == n):
@@ -114,6 +113,11 @@ def about():
 
 @app.route("/blog")
 def blog():
+    data_structures = BlogCategory(
+        "data_structures",
+        "/static/assets/blog_categories/data_structures.png",
+        "Computer Science data structure tutorials"
+    )
     linux = BlogCategory(
         "linux",
         "/static/assets/blog_categories/linux.png",
@@ -127,6 +131,7 @@ def blog():
     )
 
     items = [
+        data_structures,
         linux,
         scripting
     ]
