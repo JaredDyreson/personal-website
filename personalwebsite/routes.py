@@ -132,7 +132,7 @@ def blog():
 
     workflow = BlogCategory(
         "workflow",
-        "/static/assets/blog_categories/scripting.png",
+        "/static/assets/blog_categories/notes.jpeg",
         "Learn how to improve your workflow with some tips"
     )
 
