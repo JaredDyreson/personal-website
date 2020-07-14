@@ -60,12 +60,12 @@ def search_posts(params: tuple):
 @app.route("/home")
 def home():
     diff_project = PortfolioItem(
-        "delta",
-        "A clone of the UNIX utility 'diff'",
+        "Tuffix",
+        "Official Linux environment for CPSC 120, 121, and 131 at California State University, Fullerton (contributor to this project)",
         0,
         "/static/assets/portfolio_items/diff.jpg",
-        "https://google.com",
-        "https://github.com/JaredDyreson/delta",
+        "https://github.com/mshafae/tuffix/wiki",
+        "https://github.com/mshafae/tuffix",
         "https://google.com"
 
     )
@@ -130,10 +130,17 @@ def blog():
         "Learn how to automate tedious proceses with different scripting languages"
     )
 
+    workflow = BlogCategory(
+        "workflow",
+        "/static/assets/blog_categories/scripting.png",
+        "Learn how to improve your workflow with some tips"
+    )
+
     items = [
         data_structures,
         linux,
-        scripting
+        scripting,
+        workflow
     ]
     return render_template('blog_categories.html', BlogCategories=items, title = "Blog")
 
