@@ -119,7 +119,7 @@ def home():
 
     bauer = PortfolioItem(
         "Bauer",
-        "Reverse Notation Calculator written in Python",
+        "Reverse Polish Notation Calculator written in Python",
         4,
         "/static/assets/portfolio_items/bauer.jpg",
         "https://github.com/JaredDyreson/RPN-Calculator",
@@ -127,7 +127,8 @@ def home():
         "https://github.com/JaredDyreson/RPN-Calculator/blob/master/README.md"
 
     )
-    items = [tuffix, 
+    items = [tuffix,
+            bauer,
             starbucks_automa, 
             funnel_cake, 
             website]
