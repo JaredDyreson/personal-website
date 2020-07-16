@@ -77,15 +77,14 @@ def allowed_file(filename):
 @app.route("/")
 @app.route("/home")
 def home():
-    # TODO
     tuffix = PortfolioItem(
         "Tuffix",
         "Official Linux environment for CPSC 120, 121, and 131 at California State University, Fullerton (contributor to this project)",
         0,
-        "/static/assets/portfolio_items/diff.jpg",
-        "https://github.com/mshafae/tuffix/wiki",
+        "/static/assets/portfolio_items/tuffix.png",
+        "https://google.com",
         "https://github.com/mshafae/tuffix",
-        "https://google.com"
+        "https://github.com/mshafae/tuffix/wiki"
 
     )
     starbucks_automa = PortfolioItem(
@@ -112,9 +111,9 @@ def home():
         "A place to host portfolio items and show a little about me",
         3,
         "/static/assets/portfolio_items/python-bottle-aws-1.width-808.jpg",
-        "http://jareddyreson.com",
+        "https://www.jareddyreson.xyz",
         "https://google.com",
-        "https://github.com/JaredDyreson/aws-website"
+        "https://github.com/JaredDyreson/personal-website"
 
     )
 
@@ -183,6 +182,7 @@ def blogarticle(category, subcategory, article):
 def car():
     service_window = ServiceForm(request.form)
     reporter = RunReport(request.form)
+    chonkulator = GasolineCalculatorForm(request.form)
 
     if(service_window.validate_on_submit()):
         print("this one got push")
@@ -223,7 +223,14 @@ def car():
             return redirect(url_for('car'))
     elif(reporter.validate_on_submit()):
         return redirect(url_for('report'))
-    return render_template('car_landing.html', title = "Car Tools", form = service_window, run_report = reporter)
+
+    elif(chonkulator.validate_on_submit()):
+        GAS_PRICE = float(chonkulator.current_price.data)
+        miles_to_e = int(chonkulator.current_miles_left.data)
+        flash(f'Give the cashier ${compute(miles_to_e)}', 'success')
+        return redirect(url_for('car'))
+
+    return render_template('car_landing.html', title = "Car Tools", form = service_window, run_report = reporter, calculator = chonkulator)
 
 @app.route('/car/report', methods=['GET', 'POST'])
 def report():
@@ -236,14 +243,3 @@ def report():
         name, date, reading, sku, path = element
         packet.append(service.Service(name, date, float(reading), sku, pathlib.Path(path)))    
     return render_template('car_report.html', items = packet)
-
-
-@app.route("/calculator", methods = ['GET', 'POST'])
-def calculator():
-    chonkulator = GasolineCalculatorForm(request.form)
-    if(chonkulator.validate_on_submit()):
-        GAS_PRICE = float(chonkulator.current_price.data)
-        miles_to_e = int(chonkulator.current_miles_left.data)
-        flash(f'Give the cashier ${compute(miles_to_e)}', 'success')
-        return redirect(url_for('calculator'))
-    return render_template('calculator.html', title = "Gas Calculator", form = chonkulator)
