@@ -7,7 +7,7 @@ class Service():
                     invoices: pathlib.Path):
 
         if not(isinstance(name, str) and
-               isinstance(date, datetime) and
+               # isinstance(date, datetime) and
                isinstance(odometer_reading, float) and
                isinstance(part_sku, str) and
                isinstance(invoices, pathlib.Path)):

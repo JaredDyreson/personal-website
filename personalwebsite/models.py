@@ -91,3 +91,6 @@ class ServiceForm(FlaskForm):
     )
 
     submit = SubmitField('Upload')
+
+class RunReport(FlaskForm):
+    submit = SubmitField('Run')

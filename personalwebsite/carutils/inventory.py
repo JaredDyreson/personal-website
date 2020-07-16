@@ -13,7 +13,6 @@ class Inventory():
         self.init()
 
     def __del__(self):
-        print("connection is dead")
         self.connection.close()
 
     def init(self):
@@ -44,6 +43,11 @@ class Inventory():
             raise ValueError
         self.cursor.execute("SELECT * FROM services WHERE service_name=?", (service,))
         return self.cursor.fetchall()
+
+    def get_all_services(self) -> list:
+        self.cursor.execute("SELECT * FROM services")
+        return self.cursor.fetchall()
+        
 
     def remove_service(self, service: Service):
         if not(isinstance(service, Service)):

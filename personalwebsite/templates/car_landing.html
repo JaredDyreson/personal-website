@@ -27,6 +27,18 @@
             </div>
 
 		</form>
-	</div>
+        </div>
+
+        <div class="content-section">
+		<form method="POST" action="">
+			{{ run_report.hidden_tag() }}
+			<fieldset class="form-group">
+            <legend class="border-bottom mb-4">Run Report</legend>
+            <div class="form-group">
+                {{ run_report.submit(class="btn btn-outline-info") }}
+            </div>
+            </fieldset>
+        </form>
+        </div>
 
 {% endblock content %}

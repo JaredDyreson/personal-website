@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<style>
+  .bottom-one {
+     margin-bottom: 0.25cm;
+  }
+
+  table, th, td {
+    border: 1px solid black;
+  }
+</style>
+
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<h2 class="name">Car Report</h2>
+<table style="width:100%">
+  <tr>
+    <th>Service Name</th>
+    <th>Date</th> 
+    <th>Odomter Reading</th>
+    <th>Part SKU</th>
+  </tr>
+  {% for item in items %}
+      <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.date }}</td>
+        <td>{{ item.odometer_reading }}</td>
+        <td>{{ item.part_sku }}</td>
+      </tr>
+  {% endfor %}
+</table>
+
+{% endblock content %}

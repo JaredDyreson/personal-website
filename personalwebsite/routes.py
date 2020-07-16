@@ -3,7 +3,7 @@ from flask import Flask, render_template, url_for, flash, redirect, request, ses
 from werkzeug.utils import secure_filename
 
 from personalwebsite import app
-from personalwebsite.models import PortfolioItem, GasolineCalculatorForm, BlogItem, BlogCategory, ServiceForm
+from personalwebsite.models import PortfolioItem, GasolineCalculatorForm, BlogItem, BlogCategory, ServiceForm, RunReport
 from personalwebsite.BlogStructure import BlogHierarchy, DEFAULT_BUILD
 from personalwebsite.MarkdownParser import Markdown
 from personalwebsite.carutils import service, inventory
@@ -182,9 +182,12 @@ def blogarticle(category, subcategory, article):
 @app.route('/car', methods=['GET', 'POST'])
 def car():
     service_window = ServiceForm(request.form)
-    documents_location = pathlib.Path(f'/home/{os.getlogin()}/Documents/lancer-invoices')
+    reporter = RunReport(request.form)
+    local_documents_location = f'/home/{os.getlogin()}/Documents/lancer-invoices'
+    storage_location = f'/home/{os.getlogin()}/'
 
     if(service_window.validate_on_submit()):
+        print("this one got push")
         name = service_window.service_name.data
         reading = service_window.odometer_reading.data
         sku = service_window.part_sku.data
@@ -193,15 +196,19 @@ def car():
             flash('No file part', 'error')
             return redirect(request.url)
 
-        path = pathlib.Path(os.path.join(documents_location, request.files['file'].filename))
-        mime = os.path.basename(request.files['file'].mimetype)
+        file = request.files['file']
+        path = file.filename
+        mime = os.path.basename(file.mimetype)
+
         if not(path):
             print("no file has been selected")
             flash('File has not been selected', 'error')
             return redirect(request.url)
-        if(path.exists() and allowed_file(path) and mime == "pgp-encrypted"):
-            filename = secure_filename(str(path.absolute()))
-            shutil.copyfile(path, filename)
+        if(mime == "pgp-encrypted"):
+            filename = secure_filename(path)
+            destination = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(destination)
+
             database_path = pathlib.Path("services.db")
             connection = sqlite3.connect(database_path)
             Invent = inventory.Inventory(connection)
@@ -210,14 +217,28 @@ def car():
                 datetime.now(),
                 float(reading),
                 sku,
-                path
+                pathlib.Path(destination)
             )
             Invent.insert_service(new_service)
             Invent.connection.commit()
             flash(f'Successfully add {name}', 'success')
             return redirect(url_for('car'))
-        return redirect(url_for('car'))
-    return render_template('car_landing.html', title = "Car Tools", form = service_window)
+    elif(reporter.validate_on_submit()):
+        return redirect(url_for('report'))
+    return render_template('car_landing.html', title = "Car Tools", form = service_window, run_report = reporter)
+
+@app.route('/car/report', methods=['GET', 'POST'])
+def report():
+    database_path = pathlib.Path("services.db")
+    connection = sqlite3.connect(database_path)
+    Invent = inventory.Inventory(connection)
+    packet = []
+
+    for element in Invent.get_all_services():
+        name, date, reading, sku, path = element
+        packet.append(service.Service(name, date, float(reading), sku, pathlib.Path(path)))    
+    return render_template('car_report.html', items = packet)
+
 
 @app.route("/calculator", methods = ['GET', 'POST'])
 def calculator():
