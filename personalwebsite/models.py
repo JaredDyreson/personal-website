@@ -73,3 +73,21 @@ class GasolineCalculatorForm(FlaskForm):
     )
 
     submit = SubmitField('Calculate')
+
+class ServiceForm(FlaskForm):
+    service_name = StringField(
+        'Service Name',
+        validators=[DataRequired()]
+    )
+
+    odometer_reading = StringField(
+        'Odometer Reading',
+        validators=[DataRequired()]
+    )
+
+    part_sku = StringField(
+        'Part SKU',
+        validators=[DataRequired()]
+    )
+
+    submit = SubmitField('Upload')

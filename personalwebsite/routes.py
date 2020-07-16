@@ -1,10 +1,18 @@
 from flask import Flask, render_template, url_for, flash, redirect, request, session, send_file, send_from_directory
+
+from werkzeug.utils import secure_filename
+
 from personalwebsite import app
-from personalwebsite.models import PortfolioItem, GasolineCalculatorForm, BlogItem, BlogCategory
+from personalwebsite.models import PortfolioItem, GasolineCalculatorForm, BlogItem, BlogCategory, ServiceForm
 from personalwebsite.BlogStructure import BlogHierarchy, DEFAULT_BUILD
 from personalwebsite.MarkdownParser import Markdown
+from personalwebsite.carutils import service, inventory
+
 import pathlib
 import os
+import sqlite3
+from datetime import datetime
+import shutil
 
 GAS_PRICE = 2.5
 MPG = 26
@@ -13,6 +21,9 @@ MILES_MAX_AVAIL = MPG * TANK
 
 path = pathlib.Path(os.path.join(app.root_path, "blog"))
 Blog = BlogHierarchy(path)
+
+ALLOWED_EXTENSIONS = {'.gpg'}
+
 
 def compute(current: int) -> float:
     """
@@ -56,10 +67,18 @@ def search_posts(params: tuple):
     return None
 
 
+def allowed_file(filename):
+    if not(isinstance(filename, pathlib.Path)):
+        raise ValueError
+
+    return filename.suffix in ALLOWED_EXTENSIONS
+
+
 @app.route("/")
 @app.route("/home")
 def home():
-    diff_project = PortfolioItem(
+    # TODO
+    tuffix = PortfolioItem(
         "Tuffix",
         "Official Linux environment for CPSC 120, 121, and 131 at California State University, Fullerton (contributor to this project)",
         0,
@@ -99,7 +118,7 @@ def home():
 
     )
 
-    items = [diff_project, 
+    items = [tuffix, 
             starbucks_automa, 
             funnel_cake, 
             website]
@@ -158,6 +177,47 @@ def blogarticle(category, subcategory, article):
     if(found):
         return render_template('blog_landing_page.html', BI=found)
     return redirect(url_for('calculator'))
+
+
+@app.route('/car', methods=['GET', 'POST'])
+def car():
+    service_window = ServiceForm(request.form)
+    documents_location = pathlib.Path(f'/home/{os.getlogin()}/Documents/lancer-invoices')
+
+    if(service_window.validate_on_submit()):
+        name = service_window.service_name.data
+        reading = service_window.odometer_reading.data
+        sku = service_window.part_sku.data
+        if('file' not in request.files):
+            print("file not here")
+            flash('No file part', 'error')
+            return redirect(request.url)
+
+        path = pathlib.Path(os.path.join(documents_location, request.files['file'].filename))
+        mime = os.path.basename(request.files['file'].mimetype)
+        if not(path):
+            print("no file has been selected")
+            flash('File has not been selected', 'error')
+            return redirect(request.url)
+        if(path.exists() and allowed_file(path) and mime == "pgp-encrypted"):
+            filename = secure_filename(str(path.absolute()))
+            shutil.copyfile(path, filename)
+            database_path = pathlib.Path("services.db")
+            connection = sqlite3.connect(database_path)
+            Invent = inventory.Inventory(connection)
+            new_service = service.Service(
+                name,
+                datetime.now(),
+                float(reading),
+                sku,
+                path
+            )
+            Invent.insert_service(new_service)
+            Invent.connection.commit()
+            flash(f'Successfully add {name}', 'success')
+            return redirect(url_for('car'))
+        return redirect(url_for('car'))
+    return render_template('car_landing.html', title = "Car Tools", form = service_window)
 
 @app.route("/calculator", methods = ['GET', 'POST'])
 def calculator():
