@@ -183,8 +183,6 @@ def blogarticle(category, subcategory, article):
 def car():
     service_window = ServiceForm(request.form)
     reporter = RunReport(request.form)
-    local_documents_location = f'/home/{os.getlogin()}/Documents/lancer-invoices'
-    storage_location = f'/home/{os.getlogin()}/'
 
     if(service_window.validate_on_submit()):
         print("this one got push")
