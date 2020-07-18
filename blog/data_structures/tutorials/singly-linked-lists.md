@@ -4,4 +4,4 @@ A singly linked list is a data structure that holds elements in a unidirectional
 
 This can be seen in this diagram here:
 
-[Singly Linked List](assets/singly_linked_list.png)
+![Singly Linked List](assets/singly_linked_list.png)
