@@ -1,0 +1,108 @@
+\documentclass[10pt]{article}
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage[margin=0.5in]{geometry}
+\usepackage[colorlinks=true ,urlcolor=blue,urlbordercolor={0 1 1}]{hyperref}
+\usepackage{xcolor}
+\usepackage{tipa}
+\usepackage{tabto}
+\usepackage[parfill]{parskip}
+
+
+\newenvironment{tabs}[1]
+ {\flushleft\TabPositions{#1}}
+ {\endflushleft}
+
+\titleformat{\section}
+{\LARGE\bfseries}
+{}
+{0em}
+{}[\titlerule]
+\begin{document}
+
+\titleformat{\subsection}
+{\Large\bfseries}
+{$\bullet$}
+{0em}
+{}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+
+\pagenumbering{gobble}
+
+\urlstyle{same}
+\renewcommand{\maketitle}{\begin{center}{\huge\bfseries\theauthor}\vspace{.25em}
+
+562-631-0071 --- \href{mailto:jared.dyreson@gmail.com}{jared.dyreson@gmail.com}
+
+\url{https://www.jareddyreson.xyz/}
+
+
+\end{center}}
+
+\author{Jared Dyreson}
+\maketitle
+
+\section{Education}
+
+\noindent\textbox{\textbf{California State University Fullerton}\hfill}\textbox{\hfil\hfil}\textbox{\hfill August 2017 - Present}
+
+Bachelor of Computer Science \\ 
+Concentration: Software Engineering
+
+\section{Independent Projects}
+
+\noindent\textbox{\textbf{\large Starbucks Automa}\hfill}\textbox{\hfil\hfil}\textbox{\hfill January 2019 - Present}
+\begin{itemize}
+  \item \textbf{Description:} Automatic schedule importer for the Starbucks Partner Portal.
+  \item \textbf{Language:} Python
+\end{itemize}
+
+
+\noindent\textbox{\textbf{\large Funnel Cake}\hfill}\textbox{\hfil\hfil}\textbox{\hfill July 2019 - Present}
+\begin{itemize}
+  \item \textbf{Description:} Web application and command line utility for managing Spotify playlists.
+  \item \textbf{Language:} Python
+\end{itemize}
+
+\section{Course Projects}
+
+\noindent\textbox{\textbf{\large Bauer}\hfill}\textbox{\hfil\hfil}\textbox{\hfill February 2020 - Present}
+
+\begin{itemize}
+  \item \textbf{Description:} Reverse Polish notation calculator for the command line and as a Flask application.
+  \item \textbf{Language:} C and Python
+\end{itemize}
+
+\section{Work Experience}
+
+\noindent\textbox{\textbf{\large Starbucks - La Mirada, CA}\hfill}\textbox{\hfil\hfil}\textbox{\hfill August 2017 - Present}
+
+\begin{itemize}
+  \item Ability to work under pressure with high customer traffic
+  \item Flexible and works well with a team
+  \item Taking initiative and working well independently 
+\end{itemize}
+
+\noindent\textbox{\textbf{\large CSU Fullerton Computer Science Department Intern}\hfill}\textbox{\hfil\hfil}\textbox{\hfill June 2018 - July 2018}
+
+\begin{itemize}
+  \item Created documentation and video guides for the installation of Tuffix, an internal Linux distribution for the university's computer science students.
+  \item Worked closely with the development of additions and retractions in the alpha release alongside professors.
+\end{itemize}
+
+\section{Technical Skills}
+
+\begin{itemize}
+  \item \textbf{Software:} Atom, Microsoft Office, Excel, Vim, Visual Studio Code
+  \item \textbf{Languages:} Python, Bash, C, C++, Java
+  \item \textbf{Operating Systems:} Linux, UNIX, Windows, MacOS
+  \item \textbf{Other:} Proficient in terminal commands and shell scripting
+\end{itemize}
+
+
+\end{document}
