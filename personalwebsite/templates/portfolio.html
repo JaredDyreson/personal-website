@@ -1,29 +1,24 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<style>
-  .bottom-one {
-     margin-bottom: 0.5cm;
-  }
-</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"></link>
 
 {% for PortfolioItem in PortfolioItems %}
+<center>
+<div class="portfolio-item">
 
-<article class="media content-section">
-  <div class="media-body">
-    <h2><a class="article-title" href="{{ PortfolioItem.src_link }}">{{ PortfolioItem.title_ }}</a></h2>
-    <p class="article-content">{{ PortfolioItem.content }}</p>
-    <img src="{{ PortfolioItem.image_path }}", width=480, height=300></img>
-    <div class="article-metadata">
-    </div>
-    <ul>
-    <li><a class="project-link" href="{{ PortfolioItem.demo_link }}">Demo</a>
-    <li><a class="project-link" href="{{ PortfolioItem.doc_link }}">Documentation</a>
-    <li><a class="project-link" href="{{ PortfolioItem.src_link }}">Source Code</a>
-    </ul>
-    <p class="bottom-one"></p>
-  </div>
-</article>
+<p><b>{{ PortfolioItem.content }}</b></p>
+<img src="{{ PortfolioItem.image_path }}" width=480, height=300/>
+<ul id="menu">
+    <a href="{{ PortfolioItem.demo_link }}"><li>Demo</li></a>
+    <a href="{{ PortfolioItem.doc_link }}"><li>Documentation</li></a>
+    <a href="{{ PortfolioItem.src_link }}"><li>Source Code</li></a>
+</ul>  
+
+</div>
+</center>
+
+<br></br>
 
 {% endfor %}
 

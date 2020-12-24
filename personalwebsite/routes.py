@@ -203,10 +203,9 @@ def report():
 
 @app.route("/projects")
 def projects():
-    print("in this function, please render correctly!")
     tuffix = PortfolioItem(
         "Tuffix",
-        "Official Linux environment for CPSC 120, 121, and 131 at California State University, Fullerton (contributor to this project)",
+        "Official Linux development environment for CSUF",
         0,
         "/static/assets/portfolio_items/tuffix.png",
         "https://google.com",
@@ -246,7 +245,7 @@ def projects():
 
     bauer = PortfolioItem(
         "Bauer",
-        "Reverse Polish Notation Calculator written in Python",
+        "Reverse Polish Notation Calculator",
         4,
         "/static/assets/portfolio_items/bauer.jpg",
         "https://github.com/JaredDyreson/RPN-Calculator",
@@ -259,5 +258,5 @@ def projects():
             starbucks_automa,
             funnel_cake,
             website]
-    return render_template('portfolio_.html', PortfolioItems=items)
+    return render_template('portfolio.html', PortfolioItems=items)
 
