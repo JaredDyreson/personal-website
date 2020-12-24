@@ -1,36 +1,17 @@
-<!DOCTYPE html>
-<html lang="">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"></link>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	</head>
-    <body>
+{% extends "layout.html" %}
+{% block content %}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<center>
+<div class="center">
 
-    <center>
-     <div class="topnav">
-      <a href="/about">About</a>
-      <a href="/blog">Blog</a>
-      <a href="/demos">Demos</a>
-      <a href="/projects">Projects</a>
-      <a href="https://git.io/JLgYe">Résumé</a>
-    </div> 
-    <hr style="width:40%"></hr>
+<h1><b>Socials</b></h1>
+<hr style="width:40%"></hr>
 
-    </center>
+<a href="https://github.com/JaredDyreson"><i class="fa fa-github" style="font-size:24px"></i><span class="ml-1"/></a>
+<a href="https://www.linkedin.com/in/jared-dyreson-aa5b67189/"><i class="fa fa-linkedin-square" style="font-size:24px"></i><span class="ml-1"/></a>
+</div>
 
-    <center>
-    <div class="center">
+</center>
 
-    <h1><b>Socials</b></h1>
-    <hr style="width:40%"></hr>
+{% endblock content %}
 
-    <a href="https://github.com/JaredDyreson"><i class="fa fa-github" style="font-size:24px"></i><span class="ml-1"/></a>
-    <a href="https://www.linkedin.com/in/jared-dyreson-aa5b67189/"><i class="fa fa-linkedin-square" style="font-size:24px"></i><span class="ml-1"/></a>
-    </div>
-
-    </center>
-</html>

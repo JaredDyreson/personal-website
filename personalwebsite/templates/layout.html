@@ -1,25 +1,26 @@
-<!DOCTYPE html>
-<html>
-<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"></link>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"></link>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Personal Website</title>
+  {% block html_head %}{% endblock %}
 </head>
-
 <body>
-    <header class="site-header">
-    <center>
-     <div class="topnav">
+  <center>
+  <div id="topnav">
       <a href="/about">About</a>
       <a href="/blog">Blog</a>
       <a href="/demos">Demos</a>
       <a href="/">Home</a>
       <a href="/projects">Projects</a>
       <a href="https://git.io/JLgYe">Résumé</a>
-    </div>
-    <hr style="width:40%"></hr>
-    </center>
-    </header>
-</body>
-</html>
+  </div>
+  <hr style="width:30%"></hr>
+  <br/>
+  {% block content %}{% endblock %}
 
+  </center>
+
+</body>

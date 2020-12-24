@@ -198,7 +198,7 @@ def report():
 
     for element in Invent.get_all_services():
         name, date, reading, sku, path = element
-        packet.append(service.Service(name, date, float(reading), sku, pathlib.Path(path)))    
+        packet.append(service.Service(name, date, float(reading), sku, pathlib.Path(path)))
     return render_template('car_report.html', items = packet)
 
 @app.route("/projects")
@@ -260,3 +260,6 @@ def projects():
             website]
     return render_template('portfolio.html', PortfolioItems=items)
 
+@app.route("/testing")
+def testing():
+    return render_template('child.html')
