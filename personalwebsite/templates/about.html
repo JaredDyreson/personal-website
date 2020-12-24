@@ -1,30 +1,36 @@
-{% extends "layout.html" %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"></link>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+    <body>
 
-<style>
-  .bottom-one {
-     margin-bottom: 0.25cm;
-  }
-</style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<html>
-<head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body>
+    <center>
+     <div class="topnav">
+      <a href="/about">About</a>
+      <a href="/blog">Blog</a>
+      <a href="/demos">Demos</a>
+      <a href="/projects">Projects</a>
+      <a href="https://git.io/JLgYe">Résumé</a>
+    </div> 
+    <hr style="width:40%"></hr>
 
-<h2>Jared Dyreson</h2>
-<p>Software developer based out of Southern California</p>
-<div class="article-metadata">
-<p class="bottom-one"></p>
-</div>
+    </center>
 
-<h2>Links</h2>
-<div class="article-metadata">
-<p class="bottom-one"></p>
-</div>
-<i class="fa fa-github-square", style="font-size:32px"></i>
-<p class="bottom-one"></p>
-<i class="fa fa-linkedin-square", style="font-size:32px"></i>
+    <center>
+    <div class="center">
 
-{% endblock content %}
+    <h1><b>Socials</b></h1>
+    <hr style="width:40%"></hr>
+
+    <a href="https://github.com/JaredDyreson"><i class="fa fa-github" style="font-size:24px"></i><span class="ml-1"/></a>
+    <a href="https://www.linkedin.com/in/jared-dyreson-aa5b67189/"><i class="fa fa-linkedin-square" style="font-size:24px"></i><span class="ml-1"/></a>
+    </div>
+
+    </center>
+</html>

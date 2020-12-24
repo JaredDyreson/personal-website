@@ -77,63 +77,9 @@ def allowed_file(filename):
 @app.route("/")
 @app.route("/home")
 def home():
-    tuffix = PortfolioItem(
-        "Tuffix",
-        "Official Linux environment for CPSC 120, 121, and 131 at California State University, Fullerton (contributor to this project)",
-        0,
-        "/static/assets/portfolio_items/tuffix.png",
-        "https://google.com",
-        "https://github.com/mshafae/tuffix",
-        "https://github.com/mshafae/tuffix/wiki"
 
-    )
-    starbucks_automa = PortfolioItem(
-        "Starbucks Automa",
-        "Auto work scheduler for the Starbucks Partner Portal",
-        1,
-        "/static/assets/portfolio_items/starbucks_coffee_robot_wallpaper-t2.jpg",
-        "https://asciinema.org/a/9m8kAz6O45TyPMPAU34Hivtiv?t=1",
-        "https://jareddyreson.github.io/posts/starbucks_automa_documentation.html",
-        "https://github.com/JaredDyreson/starbucks_automa_production"
-    )
-    funnel_cake = PortfolioItem(
-        "Funnel Cake",
-        "Utility for managing Spotify playlists",
-        2,
-        "/static/assets/portfolio_items/funnel_cake.jpg",
-        "http://funnelcake-env.s29abpc9ge.us-west-1.elasticbeanstalk.com/",
-        "https://github.com/JaredDyreson/Spoterm/blob/master/flask_stuff/DOCUMENTATION.md",
-        "https://github.com/jareddyreson/funnel-cake"
-    )
-
-    website = PortfolioItem(
-        "Personal Website",
-        "A place to host portfolio items and show a little about me",
-        3,
-        "/static/assets/portfolio_items/python-bottle-aws-1.width-808.jpg",
-        "https://www.jareddyreson.xyz",
-        "https://google.com",
-        "https://github.com/JaredDyreson/personal-website"
-
-    )
-
-    bauer = PortfolioItem(
-        "Bauer",
-        "Reverse Polish Notation Calculator written in Python",
-        4,
-        "/static/assets/portfolio_items/bauer.jpg",
-        "https://github.com/JaredDyreson/RPN-Calculator",
-        "https://github.com/JaredDyreson/RPN-Calculator",
-        "https://github.com/JaredDyreson/RPN-Calculator/blob/master/README.md"
-
-    )
-    items = [tuffix,
-            bauer,
-            starbucks_automa, 
-            funnel_cake, 
-            website]
-
-    return render_template('portfolio.html', PortfolioItems=items)
+    # return render_template('portfolio.html', PortfolioItems=items)
+    return render_template('index.html')
 
 
 @app.route("/about")
@@ -254,3 +200,64 @@ def report():
         name, date, reading, sku, path = element
         packet.append(service.Service(name, date, float(reading), sku, pathlib.Path(path)))    
     return render_template('car_report.html', items = packet)
+
+@app.route("/projects")
+def projects():
+    print("in this function, please render correctly!")
+    tuffix = PortfolioItem(
+        "Tuffix",
+        "Official Linux environment for CPSC 120, 121, and 131 at California State University, Fullerton (contributor to this project)",
+        0,
+        "/static/assets/portfolio_items/tuffix.png",
+        "https://google.com",
+        "https://github.com/mshafae/tuffix",
+        "https://github.com/mshafae/tuffix/wiki"
+
+    )
+    starbucks_automa = PortfolioItem(
+        "Starbucks Automa",
+        "Auto work scheduler for the Starbucks Partner Portal",
+        1,
+        "/static/assets/portfolio_items/starbucks_coffee_robot_wallpaper-t2.jpg",
+        "https://asciinema.org/a/9m8kAz6O45TyPMPAU34Hivtiv?t=1",
+        "https://jareddyreson.github.io/posts/starbucks_automa_documentation.html",
+        "https://github.com/JaredDyreson/starbucks_automa_production"
+    )
+    funnel_cake = PortfolioItem(
+        "Funnel Cake",
+        "Utility for managing Spotify playlists",
+        2,
+        "/static/assets/portfolio_items/funnel_cake.jpg",
+        "http://funnelcake-env.s29abpc9ge.us-west-1.elasticbeanstalk.com/",
+        "https://github.com/JaredDyreson/Spoterm/blob/master/flask_stuff/DOCUMENTATION.md",
+        "https://github.com/jareddyreson/funnel-cake"
+    )
+
+    website = PortfolioItem(
+        "Personal Website",
+        "A place to host portfolio items and show a little about me",
+        3,
+        "/static/assets/portfolio_items/python-bottle-aws-1.width-808.jpg",
+        "https://www.jareddyreson.xyz",
+        "https://google.com",
+        "https://github.com/JaredDyreson/personal-website"
+
+    )
+
+    bauer = PortfolioItem(
+        "Bauer",
+        "Reverse Polish Notation Calculator written in Python",
+        4,
+        "/static/assets/portfolio_items/bauer.jpg",
+        "https://github.com/JaredDyreson/RPN-Calculator",
+        "https://github.com/JaredDyreson/RPN-Calculator",
+        "https://github.com/JaredDyreson/RPN-Calculator/blob/master/README.md"
+
+    )
+    items = [tuffix,
+            bauer,
+            starbucks_automa,
+            funnel_cake,
+            website]
+    return render_template('portfolio_.html', PortfolioItems=items)
+
