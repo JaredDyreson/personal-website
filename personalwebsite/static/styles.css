@@ -79,7 +79,36 @@ h1.fancy {
 }
 
 .portfolio-item {
-  border: 3px solid white;
-  width : 730px;
-  height: 610px;
+    border: 3px solid white;
+    width : 730px;
+    height: 610px;
+
+    /*position: absolute;*/
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*margin-right: -50%;*/
+    /*transform: translate(-50%, -50%)*/
 }
+
+.modal-header {
+  color: black;
+
+}
+
+.modal-body {
+    color: black;
+}
+
+.bottom-three {
+ margin-bottom: 3cm;
+}
+
+/*.modal-custom .modal-dialog {*/
+  /*background-color: #222;*/
+  /*margin: auto;*/
+  /*padding: 20px;*/
+  /*border: 1px solid #888;*/
+  /*width: 80%;*/
+  /*color: blue;*/
+
+/*}*/

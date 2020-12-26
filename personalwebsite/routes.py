@@ -3,7 +3,7 @@ from flask import Flask, render_template, url_for, flash, redirect, request, ses
 from werkzeug.utils import secure_filename
 
 from personalwebsite import app
-from personalwebsite.models import PortfolioItem, GasolineCalculatorForm, BlogItem, BlogCategory, ServiceForm, RunReport
+from personalwebsite.models import PortfolioItem, GasolineCalculatorForm, BlogItem, BlogCategory, ServiceForm, RunReport, DemoItem
 from personalwebsite.BlogStructure import BlogHierarchy, DEFAULT_BUILD
 from personalwebsite.MarkdownParser import Markdown
 from personalwebsite.carutils import service, inventory
@@ -201,6 +201,48 @@ def report():
         packet.append(service.Service(name, date, float(reading), sku, pathlib.Path(path)))
     return render_template('car_report.html', items = packet)
 
+@app.route("/demos")
+def demos():
+    cella_ant = DemoItem(
+        "Cella Ant 0x15",
+        "Cella-Ant",
+        "https://github.com/JaredDyreson/Cella-Ant-x15",
+        "A cellular automaton variant of Langton's Ant",
+        ["Jared Dyreson", "Mason Godfrey"],
+        ["CSS", "HTML", "Javascript"]
+    )
+
+    sorting_olympics = DemoItem(
+        "Sorting Olympics",
+        "Sorting-Olympics",
+        "https://github.com/JaredDyreson/Sorting-Olympics",
+        "Sorting algorithm comparision program",
+        ["Jared Dyreson", "Mason Godfrey"],
+        ["CSS", "HTML", "Javascript"]
+    )
+
+    balloon_juice = DemoItem(
+        "Balloon Juice",
+        "Balloon-Juice",
+        "https://github.com/JaredDyreson/Ballon-Juice/",
+        "Mission reconnaissance visualizer, showing a bot retrieve a balloon in a deeply nested balloon field",
+        ["Jared Dyreson", "Mason Godfrey"],
+        ["CSS", "HTML", "Javascript"]
+    )
+
+
+
+    items = [
+        cella_ant,
+        sorting_olympics,
+        # balloon_juice
+    ]
+
+    categories = {
+        "Javascript": items
+    }
+    return render_template('demos.html', Demos=items)
+
 @app.route("/projects")
 def projects():
     tuffix = PortfolioItem(
@@ -254,12 +296,8 @@ def projects():
 
     )
     items = [tuffix,
-            bauer,
-            starbucks_automa,
-            funnel_cake,
+            # bauer,
+            # starbucks_automa,
+            # funnel_cake,
             website]
     return render_template('portfolio.html', PortfolioItems=items)
-
-@app.route("/testing")
-def testing():
-    return render_template('child.html')

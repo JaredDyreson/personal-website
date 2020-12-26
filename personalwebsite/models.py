@@ -94,3 +94,24 @@ class ServiceForm(FlaskForm):
 
 class RunReport(FlaskForm):
     submit = SubmitField('Run')
+
+class DemoItem():
+    def __init__(self, name : str, local_link : str,
+                    src_code_link: str, information : str,
+                    authors: list, languages: list):
+        if not(isinstance(name, str)
+               and isinstance(local_link, str)
+               and isinstance(information, str)
+               and isinstance(src_code_link, str)
+               and isinstance(authors, list)
+               and isinstance(languages, list)):
+            raise ValueError
+
+        self.authors = authors
+        self.demo_link = local_link
+        self.base_link = 'static/demos'
+        self.full_link = f'{self.base_link}/{self.demo_link}/runtime/driver.html'
+        self.information = information
+        self.languages = languages
+        self.name = name
+        self.src_code_link = src_code_link

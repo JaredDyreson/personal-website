@@ -1,0 +1,6 @@
+[submodule "personalwebsite/static/demos/Cella-Ant"]
+	path = personalwebsite/static/demos/Cella-Ant
+	url = https://github.com/JaredDyreson/Cella-Ant-x15.git
+[submodule "personalwebsite/static/demos/Sorting-Olympics"]
+	path = personalwebsite/static/demos/Sorting-Olympics
+	url = https://github.com/JaredDyreson/Sorting-Olympics.git

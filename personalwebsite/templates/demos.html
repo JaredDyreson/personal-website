@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+{% extends "layout.html" %}
+{% block content %}
+
+
+{% for Demo in Demos %}
+
+<center>
+<div class="demo-item">
+
+<h1><b>{{ Demo.name }}</b></h1>
+<hr style="width:40%"></hr>
+
+<form action="../{{ Demo.full_link }}">
+    <input type="submit" class="invoke-demo" value="Demo"</input>
+</form>
+
+<button type="button" class="invoke-demo" data-toggle="modal" data-target="#DemoModal{{ Demo.name.replace(" ", "") }}">Information</button>
+
+<!-- Modal -->
+<div class="modal fade" id="DemoModal{{ Demo.name.replace(" ", "") }}" role="dialog">
+<div class="modal-dialog">
+
+  <!-- Modal content-->
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">{{ Demo.name }}</h4>
+    </div>
+    <div class="modal-body">
+      <p>{{ Demo.information }}</p>
+      <p>Authors: {{ ', '.join(Demo.authors) }}</p>
+      <p>Source code link: <a href="{{ Demo.src_code_link }}">Here</a></p>
+      <p>Language(s): {{ ', '.join(Demo.languages) }}</p>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+  
+</div>
+
+
+</div>
+
+
+<br/>
+</div>
+</center>
+
+<br></br>
+
+{% endfor %}
+
+{% endblock content %}
