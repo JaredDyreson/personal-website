@@ -40,24 +40,25 @@ class BlogCategory():
         self.image_path = image_src
 
 class PortfolioItem():
-    def __init__(self, title, content, number,
-                    image_path, demo_link, doc_link, src_link):
+    def __init__(self, title : str, description : str,
+                    image_path : str, doc_link : str,
+                    src_link : str, authors: list, languages: list):
         if not(isinstance(title, str) or
-                isinstance(content, str) or
-                isinstance(number, int) or
+                isinstance(description, str) or
                 isinstance(image_path, str) or
-                isinstance(demo_link, str) or
                 isinstance(doc_link, str) or
-                isinstance(src_link, str)):
+                isinstance(src_link, str) or
+                isinstance(authors, list) or
+                isinstance(languages, list)):
             raise ValueError
 
-        self.content = content
-        self.demo_link = demo_link
-        self.doc_link = doc_link
+        self.authors = authors
+        self.description = description
+        self.doc_link = doc_link # should point to an official PDF rendition or article
         self.image_path = image_path
-        self.number = number
+        self.languages = languages
+        self.name = title
         self.src_link = src_link
-        self.title_ = title
 
 
 class GasolineCalculatorForm(FlaskForm):

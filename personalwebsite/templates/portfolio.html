@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 {% extends "layout.html" %}
 {% block content %}
 
@@ -5,17 +6,45 @@
 <center>
 <div class="portfolio-item">
 
-<p><b>{{ PortfolioItem.content }}</b></p>
+<h1><b>{{ PortfolioItem.name }}</b></h1>
+<hr style="width:40%"></hr>
 <img src="{{ PortfolioItem.image_path }}" width=480, height=300/>
-<ul id="menu">
-    <a href="{{ PortfolioItem.demo_link }}"><li>Demo</li></a>
-    <a href="{{ PortfolioItem.doc_link }}"><li>Documentation</li></a>
-    <a href="{{ PortfolioItem.src_link }}"><li>Source Code</li></a>
-</ul>  
+<br/>
+<br/>
 
+<button type="button" class="invoke-demo" data-toggle="modal" data-target="#PortfolioItemModal{{ PortfolioItem.name.replace(" ", "") }}">Information</button>
+
+<!-- Modal -->
+<div class="modal fade" id="PortfolioItemModal{{ PortfolioItem.name.replace(" ", "") }}" role="dialog">
+<div class="modal-dialog">
+
+  <!-- Modal content-->
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">{{ PortfolioItem.name }}</h4>
+    </div>
+    <div class="modal-body">
+      <p>{{ PortfolioItem.description }}</p>
+      <p>Authors: {{ ', '.join(PortfolioItem.authors) }}</p>
+      <p>Source code link: <a href="{{ PortfolioItem.src_link }}">Here</a></p>
+      <p>Documentation: <a href="{{ PortfolioItem.doc_link }}">Here</a></p>
+      <p>Language(s): {{ ', '.join(PortfolioItem.languages) }}</p>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+  
 </div>
 
-<p class="bottom-three"/>
+<br/>
+</div>
+
+
+<br/>
+</div>
 </center>
 
 <br></br>
