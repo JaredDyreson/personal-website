@@ -86,38 +86,38 @@ def home():
 def about():
     return render_template('about.html', title = "About")
 
-@app.route("/blog")
-def blog():
-    data_structures = BlogCategory(
-        "data_structures",
-        "/static/assets/blog_categories/data_structures.png",
-        "Computer Science data structure tutorials"
-    )
-    linux = BlogCategory(
-        "linux",
-        "/static/assets/blog_categories/linux.png",
-        "All things Linux related"
-    )
+# @app.route("/blog")
+# def blog():
+    # data_structures = BlogCategory(
+        # "data_structures",
+        # "/static/assets/blog_categories/data_structures.png",
+        # "Computer Science data structure tutorials"
+    # )
+    # linux = BlogCategory(
+        # "linux",
+        # "/static/assets/blog_categories/linux.png",
+        # "All things Linux related"
+    # )
 
-    scripting = BlogCategory(
-        "scripting",
-        "/static/assets/blog_categories/scripting.png",
-        "Learn how to automate tedious proceses with different scripting languages"
-    )
+    # scripting = BlogCategory(
+        # "scripting",
+        # "/static/assets/blog_categories/scripting.png",
+        # "Learn how to automate tedious proceses with different scripting languages"
+    # )
 
-    workflow = BlogCategory(
-        "workflow",
-        "/static/assets/blog_categories/notes.jpeg",
-        "Learn how to improve your workflow with some tips"
-    )
+    # workflow = BlogCategory(
+        # "workflow",
+        # "/static/assets/blog_categories/notes.jpeg",
+        # "Learn how to improve your workflow with some tips"
+    # )
 
-    items = [
-        data_structures,
-        linux,
-        scripting,
-        workflow
-    ]
-    return render_template('blog_categories.html', BlogCategories=items, title = "Blog")
+    # items = [
+        # data_structures,
+        # linux,
+        # scripting,
+        # workflow
+    # ]
+    # return render_template('blog_categories.html', BlogCategories=items, title = "Blog")
 
 @app.route("/blog/<category>")
 def blogcategories(category):
@@ -203,6 +203,8 @@ def report():
 
 @app.route("/demos")
 def demos():
+    # 335 Siska Projects
+
     cella_ant = DemoItem(
         "Cella Ant 0x15",
         "Cella-Ant",
@@ -229,8 +231,6 @@ def demos():
         ["Jared Dyreson", "Mason Godfrey"],
         ["CSS", "HTML", "Javascript"]
     )
-
-
 
     items = [
         cella_ant,
